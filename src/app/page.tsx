@@ -132,6 +132,40 @@ export default function TodayPage() {
         </div>
       </section>
 
+      {(() => {
+        const privates = [...data.privateGames]
+          .filter((g) => g.status !== "cancelled")
+          .sort((a, b) => new Date(a.startAt).getTime() - new Date(b.startAt).getTime());
+        const next = privates[0];
+        return (
+          <section>
+            <div className="mb-3 flex items-center justify-between">
+              <h2 className="text-lg font-bold text-cream">Private games</h2>
+              <Link href="/private" className="text-sm text-gold font-semibold">
+                All →
+              </Link>
+            </div>
+            <Link href="/private" className="card block active:scale-[0.99] transition">
+              <div className="flex items-center justify-between gap-3">
+                <div>
+                  <div className="font-bold text-cream">
+                    {privates.length} upcoming private table{privates.length === 1 ? "" : "s"}
+                  </div>
+                  {next ? (
+                    <div className="mt-1 text-sm text-cream-muted">
+                      Next: {next.name} · {formatTime(next.startAt)} · {next.blinds}
+                    </div>
+                  ) : (
+                    <div className="mt-1 text-sm text-cream-dim">Book a private table anytime</div>
+                  )}
+                </div>
+                <span className="text-gold font-bold shrink-0">Book →</span>
+              </div>
+            </Link>
+          </section>
+        );
+      })()}
+
       <div className="grid grid-cols-2 gap-3">
         <Link href="/waitlist" className="btn-primary text-center">
           Join Waitlist

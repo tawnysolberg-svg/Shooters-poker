@@ -1,6 +1,8 @@
 export type GameStatus = "open" | "full" | "closed";
 export type TournamentStatus = "registering" | "late_reg" | "in_play" | "completed" | "cancelled";
 export type WaitlistEntryStatus = "waiting" | "seated" | "skipped" | "removed";
+export type PrivateGameStatus = "open" | "full" | "confirmed" | "cancelled";
+export type BookingStatus = "pending" | "confirmed" | "declined";
 
 export interface BlindLevel {
   level: number;
@@ -75,10 +77,48 @@ export interface HouseRules {
   updatedAt: string;
 }
 
+/** Booked/hosted table — listed on /private, never mixed into public /cash. */
+export interface PrivateGame {
+  id: string;
+  name: string;
+  gameType: string;
+  blinds: string; // e.g. "$2/$5" or stakes text
+  buyInMin: number;
+  buyInMax: number; // same as min for flat buy-in
+  startAt: string; // ISO
+  durationHours: number;
+  maxPlayers: number;
+  seatedCount: number;
+  hostName: string;
+  status: PrivateGameStatus;
+  notes?: string;
+  visibility: "private";
+  updatedAt: string;
+}
+
+/** Player request for a private table. */
+export interface BookingRequest {
+  id: string;
+  name: string;
+  phone: string;
+  requestedStartAt: string; // ISO
+  gameType: string;
+  stakes: string; // blinds/stakes text
+  buyIn: number;
+  playerCount: number;
+  notes?: string;
+  status: BookingStatus;
+  createdAt: string;
+  privateGameId?: string;
+  staffNote?: string;
+}
+
 export interface AppStore {
   cashGames: CashGame[];
   waitlist: WaitlistEntry[];
   tournaments: Tournament[];
   houseRules: HouseRules;
+  privateGames: PrivateGame[];
+  bookings: BookingRequest[];
   version: number;
 }

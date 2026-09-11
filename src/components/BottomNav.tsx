@@ -8,6 +8,7 @@ const links = [
   { href: "/cash", label: "Cash", icon: "💵" },
   { href: "/waitlist", label: "Waitlist", icon: "📋" },
   { href: "/tournaments", label: "Tourneys", icon: "🏆" },
+  { href: "/private", label: "Private", icon: "🔒" },
   { href: "/rules", label: "Rules", icon: "📜" },
 ];
 
@@ -17,7 +18,7 @@ export function BottomNav() {
 
   return (
     <nav className="fixed bottom-0 inset-x-0 z-40 border-t border-felt-light/30 bg-charcoal/95 backdrop-blur-md pb-[env(safe-area-inset-bottom)]">
-      <div className="mx-auto flex max-w-3xl justify-around px-1 py-1">
+      <div className="mx-auto flex max-w-3xl justify-around px-0.5 py-1">
         {links.map((l) => {
           const active =
             l.href === "/"
@@ -27,11 +28,11 @@ export function BottomNav() {
             <Link
               key={l.href}
               href={l.href}
-              className={`flex flex-1 flex-col items-center gap-0.5 rounded-xl px-1 py-2 text-[11px] font-semibold min-h-[56px] justify-center transition ${
+              className={`flex flex-1 flex-col items-center gap-0.5 rounded-xl px-0.5 py-2 text-[10px] sm:text-[11px] font-semibold min-h-[56px] justify-center transition ${
                 active ? "text-gold bg-felt/50" : "text-cream-dim hover:text-cream"
               }`}
             >
-              <span className="text-lg leading-none" aria-hidden>
+              <span className="text-base sm:text-lg leading-none" aria-hidden>
                 {l.icon}
               </span>
               {l.label}

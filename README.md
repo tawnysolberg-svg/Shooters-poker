@@ -29,14 +29,16 @@ After unlock, a session cookie keeps you signed in for 12 hours. Use **Staff** i
 
 | Route | Description |
 |-------|-------------|
-| `/` | Today — schedule overview (cash + tournaments) |
+| `/` | Today — schedule overview (cash + tournaments + private teaser) |
 | `/cash` | Live cash tables, join waitlist |
 | `/waitlist` | Per-game waitlists; staff seat/skip/remove when admin |
 | `/tournaments` | Today + upcoming tournaments |
 | `/tournaments/[id]` | Details, register/unregister, live clock if in play |
+| `/private` | Upcoming private games (not on public cash floor) |
+| `/book` | Request / book a private table |
 | `/check-in` | Door check-in — search/tap registered players |
 | `/rules` | House rules (admin can edit) |
-| `/admin` | PIN-gated staff console |
+| `/admin` | PIN-gated staff console (incl. private games & bookings) |
 | `/tv` | Display-only tournament clock |
 
 ## Data persistence
@@ -46,7 +48,7 @@ Shared server-side store lives in `data/store.json`. API routes read/write this 
 - Edits survive refresh and server restart
 - Multiple browser tabs stay in sync via polling (and optional SSE at `/api/stream`)
 
-Seed data loads automatically on first run (cash tables, waitlists, an in-play tournament mid-level, upcoming events, house rules).
+Seed data loads automatically on first run (cash tables, waitlists, an in-play tournament mid-level, upcoming events, private games, booking requests, house rules).
 
 Reset seed (dev):
 

@@ -7,11 +7,25 @@ const DATA_DIR = path.join(process.cwd(), "data");
 const STORE_PATH = path.join(DATA_DIR, "store.json");
 
 let writeQueue: Promise<void> = Promise.resolve();
+let didBackfill = false;
 
 function ensureDataDir() {
   if (!fs.existsSync(DATA_DIR)) {
     fs.mkdirSync(DATA_DIR, { recursive: true });
   }
+}
+
+/** Ensure newer fields exist on stores written before private games / bookings. */
+function normalizeStore(raw: Partial<AppStore>): AppStore {
+  return {
+    cashGames: raw.cashGames || [],
+    waitlist: raw.waitlist || [],
+    tournaments: raw.tournaments || [],
+    houseRules: raw.houseRules || { content: "", updatedAt: new Date().toISOString() },
+    privateGames: Array.isArray(raw.privateGames) ? raw.privateGames : [],
+    bookings: Array.isArray(raw.bookings) ? raw.bookings : [],
+    version: raw.version || 0,
+  };
 }
 
 export function readStore(): AppStore {
@@ -22,14 +36,39 @@ export function readStore(): AppStore {
     return seed;
   }
   const raw = fs.readFileSync(STORE_PATH, "utf-8");
-  return JSON.parse(raw) as AppStore;
+  const disk = JSON.parse(raw) as Partial<AppStore>;
+  const parsed = normalizeStore(disk);
+
+  // One-time backfill of seed private games / bookings when upgrading an old store.
+  if (
+    !didBackfill &&
+    (!Array.isArray(disk.privateGames) || !Array.isArray(disk.bookings))
+  ) {
+    didBackfill = true;
+    const seed = createSeedStore();
+    if (!Array.isArray(disk.privateGames)) {
+      parsed.privateGames = seed.privateGames;
+    }
+    if (!Array.isArray(disk.bookings)) {
+      parsed.bookings = seed.bookings;
+    }
+    // Persist outside of updateStore queue (cold upgrade path only).
+    ensureDataDir();
+    const tmp = STORE_PATH + ".tmp";
+    const toWrite = { ...parsed, version: (parsed.version || 0) + 1 };
+    fs.writeFileSync(tmp, JSON.stringify(toWrite, null, 2), "utf-8");
+    fs.renameSync(tmp, STORE_PATH);
+    return toWrite;
+  }
+
+  return parsed;
 }
 
 export function writeStore(store: AppStore): void {
   ensureDataDir();
   store.version = (store.version || 0) + 1;
   const tmp = STORE_PATH + ".tmp";
-  fs.writeFileSync(tmp, JSON.stringify(store, null, 2), "utf-8");
+  fs.writeFileSync(tmp, JSON.stringify(normalizeStore(store), null, 2), "utf-8");
   fs.renameSync(tmp, STORE_PATH);
 }
 

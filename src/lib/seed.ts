@@ -1,4 +1,4 @@
-import type { AppStore, BlindLevel } from "./types";
+import type { AppStore, BlindLevel, PrivateGame, BookingRequest } from "./types";
 
 function id(prefix: string): string {
   return `${prefix}_${Math.random().toString(36).slice(2, 10)}`;
@@ -339,6 +339,87 @@ export function createSeedStore(): AppStore {
         updatedAt,
       },
     ],
+    privateGames: [
+      {
+        id: id("priv"),
+        name: "Friday Night 2/5 Private",
+        gameType: "NLH",
+        blinds: "$2/$5",
+        buyInMin: 500,
+        buyInMax: 1500,
+        startAt: daysFromNow(0, 20, 0), // tonight if Friday seed day
+        durationHours: 5,
+        maxPlayers: 9,
+        seatedCount: 4,
+        hostName: "Mike H.",
+        status: "open",
+        notes: "Private invite table — ask floor or host for a seat",
+        visibility: "private",
+        updatedAt,
+      },
+      {
+        id: id("priv"),
+        name: "Saturday Birthday PLO",
+        gameType: "PLO",
+        blinds: "$1/$2",
+        buyInMin: 200,
+        buyInMax: 600,
+        startAt: daysFromNow(1, 15, 0),
+        durationHours: 4,
+        maxPlayers: 8,
+        seatedCount: 6,
+        hostName: "Sara B.",
+        status: "open",
+        notes: "Birthday celebration — cake at break",
+        visibility: "private",
+        updatedAt,
+      },
+      {
+        id: id("priv"),
+        name: "Midweek Confirmed NLH",
+        gameType: "NLH",
+        blinds: "$1/$3",
+        buyInMin: 300,
+        buyInMax: 300,
+        startAt: daysFromNow(4, 19, 0),
+        durationHours: 4,
+        maxPlayers: 9,
+        seatedCount: 9,
+        hostName: "Derek L.",
+        status: "confirmed",
+        notes: "Fully confirmed private — flat $300 buy-in",
+        visibility: "private",
+        updatedAt,
+      },
+    ] as PrivateGame[],
+    bookings: [
+      {
+        id: id("book"),
+        name: "Andrea Voss",
+        phone: "555-0411",
+        requestedStartAt: daysFromNow(2, 18, 0),
+        gameType: "NLH",
+        stakes: "$2/$5",
+        buyIn: 1000,
+        playerCount: 8,
+        notes: "Bachelor party — prefer back room if available",
+        status: "pending",
+        createdAt: new Date(now.getTime() - 3 * 60 * 60 * 1000).toISOString(),
+      },
+      {
+        id: id("book"),
+        name: "Tony Reyes",
+        phone: "555-0488",
+        requestedStartAt: daysFromNow(5, 19, 30),
+        gameType: "PLO",
+        stakes: "$1/$2 PLO",
+        buyIn: 400,
+        playerCount: 6,
+        notes: "Regular crew — flexible on start time",
+        status: "pending",
+        createdAt: new Date(now.getTime() - 90 * 60 * 1000).toISOString(),
+      },
+    ] as BookingRequest[],
     houseRules: {
       content: `SHOOTERS POKER ROOM — HOUSE RULES
 

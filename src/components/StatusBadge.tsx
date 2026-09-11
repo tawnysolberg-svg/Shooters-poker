@@ -10,6 +10,9 @@ const styles: Record<string, string> = {
   completed: "bg-charcoal-light text-cream-dim border-charcoal-soft",
   cancelled: "bg-red-900/40 text-red-300 border-red-700/40",
   waiting: "bg-felt-mid text-cream border-felt-light",
+  confirmed: "bg-emerald-600/30 text-emerald-300 border-emerald-500/40",
+  pending: "bg-amber-600/30 text-amber-200 border-amber-500/40",
+  declined: "bg-red-900/40 text-red-300 border-red-700/40",
 };
 
 export function StatusBadge({ status }: { status: string }) {

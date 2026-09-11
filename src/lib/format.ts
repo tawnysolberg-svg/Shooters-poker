@@ -60,6 +60,9 @@ export function statusLabel(status: string): string {
     seated: "Seated",
     skipped: "Skipped",
     removed: "Removed",
+    confirmed: "Confirmed",
+    pending: "Pending",
+    declined: "Declined",
   };
   return map[status] || status;
 }
