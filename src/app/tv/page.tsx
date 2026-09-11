@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useClock } from "@/lib/hooks";
 import { TournamentClockView } from "@/components/TournamentClockView";
@@ -50,7 +51,12 @@ export default function TvPage() {
         </div>
       </div>
       {!clock ? (
-        <div className="text-cream-muted text-xl">No tournament in play</div>
+        <div className="text-center space-y-6">
+          <div className="text-cream-muted text-xl">No tournament in play</div>
+          <Link href="/tv/promos" className="inline-block text-gold text-lg hover:underline">
+            Open promo loop
+          </Link>
+        </div>
       ) : (
         <div className="w-full max-w-4xl">
           <TournamentClockView

@@ -3,6 +3,7 @@ export type TournamentStatus = "registering" | "late_reg" | "in_play" | "complet
 export type WaitlistEntryStatus = "waiting" | "seated" | "skipped" | "removed";
 export type PrivateGameStatus = "open" | "full" | "confirmed" | "cancelled";
 export type BookingStatus = "pending" | "confirmed" | "declined";
+export type PromoMediaType = "image" | "video" | "slide";
 
 export interface BlindLevel {
   level: number;
@@ -113,6 +114,20 @@ export interface BookingRequest {
   staffNote?: string;
 }
 
+
+/** Full-screen TV promo playlist item (images, videos, or branded slides). */
+export interface PromoItem {
+  id: string;
+  type: PromoMediaType;
+  /** For image/video: public URL or path. Unused for slide. */
+  url?: string;
+  title?: string;
+  subtitle?: string;
+  body?: string;
+  /** Seconds to show images/slides. Videos advance on ended. Default 10. */
+  durationSeconds?: number;
+}
+
 export interface AppStore {
   cashGames: CashGame[];
   waitlist: WaitlistEntry[];
@@ -120,5 +135,6 @@ export interface AppStore {
   houseRules: HouseRules;
   privateGames: PrivateGame[];
   bookings: BookingRequest[];
+  promoPlaylist: PromoItem[];
   version: number;
 }

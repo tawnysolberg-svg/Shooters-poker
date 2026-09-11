@@ -1,4 +1,4 @@
-import type { AppStore, BlindLevel, PrivateGame, BookingRequest } from "./types";
+import type { AppStore, BlindLevel, PrivateGame, BookingRequest, PromoItem } from "./types";
 
 function id(prefix: string): string {
   return `${prefix}_${Math.random().toString(36).slice(2, 10)}`;
@@ -420,6 +420,49 @@ export function createSeedStore(): AppStore {
         createdAt: new Date(now.getTime() - 90 * 60 * 1000).toISOString(),
       },
     ] as BookingRequest[],
+
+    promoPlaylist: [
+      {
+        id: "promo_welcome",
+        type: "slide",
+        title: "Shooters Poker Room",
+        subtitle: "Montana · Big Sky Country",
+        body: "Cash · Tournaments · Private Games",
+        durationSeconds: 10,
+      },
+      {
+        id: "promo_tv_tourney",
+        type: "slide",
+        title: "$60 Hold'em",
+        subtitle: "Win a Big-Screen TV",
+        body: "Sun 4 PM · Tue 7 PM · Thu 7 PM · 18+",
+        durationSeconds: 12,
+      },
+      {
+        id: "promo_cash",
+        type: "slide",
+        title: "NLH 2/10 Cash",
+        subtitle: "Open nights",
+        body: "Sun · Mon (PLO too) · Tue · Thu · Sat",
+        durationSeconds: 10,
+      },
+      {
+        id: "promo_private",
+        type: "slide",
+        title: "Book a Private Table",
+        subtitle: "Any day · Reserve in the app",
+        body: "shooters-poker.vercel.app/book",
+        durationSeconds: 12,
+      },
+      {
+        id: "promo_comps",
+        type: "slide",
+        title: "Player Comps",
+        subtitle: "On us",
+        body: "Free soda · Free snacks · Free pizza",
+        durationSeconds: 10,
+      },
+    ] as PromoItem[],
     houseRules: {
       content: `SHOOTERS POKER ROOM — HOUSE RULES
 

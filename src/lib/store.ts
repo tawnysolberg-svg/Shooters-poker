@@ -24,6 +24,7 @@ function normalizeStore(raw: Partial<AppStore>): AppStore {
     houseRules: raw.houseRules || { content: "", updatedAt: new Date().toISOString() },
     privateGames: Array.isArray(raw.privateGames) ? raw.privateGames : [],
     bookings: Array.isArray(raw.bookings) ? raw.bookings : [],
+    promoPlaylist: Array.isArray(raw.promoPlaylist) ? raw.promoPlaylist : [],
     version: raw.version || 0,
   };
 }
@@ -42,7 +43,9 @@ export function readStore(): AppStore {
   // One-time backfill of seed private games / bookings when upgrading an old store.
   if (
     !didBackfill &&
-    (!Array.isArray(disk.privateGames) || !Array.isArray(disk.bookings))
+    (!Array.isArray(disk.privateGames) ||
+      !Array.isArray(disk.bookings) ||
+      !Array.isArray(disk.promoPlaylist))
   ) {
     didBackfill = true;
     const seed = createSeedStore();
@@ -51,6 +54,9 @@ export function readStore(): AppStore {
     }
     if (!Array.isArray(disk.bookings)) {
       parsed.bookings = seed.bookings;
+    }
+    if (!Array.isArray(disk.promoPlaylist) || disk.promoPlaylist.length === 0) {
+      parsed.promoPlaylist = seed.promoPlaylist;
     }
     // Persist outside of updateStore queue (cold upgrade path only).
     ensureDataDir();

@@ -40,6 +40,7 @@ After unlock, a session cookie keeps you signed in for 12 hours. Use **Staff** i
 | `/rules` | House rules (admin can edit) |
 | `/admin` | PIN-gated staff console (incl. private games & bookings) |
 | `/tv` | Display-only tournament clock |
+| `/tv/promos` | Full-screen promo / video loop for the room TV |
 
 ## Data persistence
 
