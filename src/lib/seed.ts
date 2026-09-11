@@ -423,27 +423,25 @@ export function createSeedStore(): AppStore {
 
     promoPlaylist: [
       {
+        id: "promo_flyer_schedule",
+        type: "image",
+        url: "/promos/weekly-schedule.png",
+        title: "Weekly Schedule",
+        durationSeconds: 15,
+      },
+      {
+        id: "promo_flyer_tv",
+        type: "image",
+        url: "/promos/tv-tournament.png",
+        title: "TV Tournament",
+        durationSeconds: 15,
+      },
+      {
         id: "promo_welcome",
         type: "slide",
         title: "Shooters Poker Room",
         subtitle: "Montana · Big Sky Country",
         body: "Cash · Tournaments · Private Games",
-        durationSeconds: 10,
-      },
-      {
-        id: "promo_tv_tourney",
-        type: "slide",
-        title: "$60 Hold'em",
-        subtitle: "Win a Big-Screen TV",
-        body: "Sun 4 PM · Tue 7 PM · Thu 7 PM · 18+",
-        durationSeconds: 12,
-      },
-      {
-        id: "promo_cash",
-        type: "slide",
-        title: "NLH 2/10 Cash",
-        subtitle: "Open nights",
-        body: "Sun · Mon (PLO too) · Tue · Thu · Sat",
         durationSeconds: 10,
       },
       {
