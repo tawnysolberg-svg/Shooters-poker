@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0a1f18;
+  --foreground: #f5e6c8;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  min-height: 100dvh;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-xl px-5 py-3.5 text-base font-semibold
+      transition active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none
+      min-h-[52px] touch-manipulation;
+  }
+  .btn-primary {
+    @apply btn bg-gold text-charcoal hover:bg-gold-bright shadow-glow;
+  }
+  .btn-secondary {
+    @apply btn bg-felt-mid text-cream border border-felt-light hover:bg-felt-light;
+  }
+  .btn-danger {
+    @apply btn bg-red-800/90 text-cream hover:bg-red-700;
+  }
+  .btn-ghost {
+    @apply btn bg-transparent text-cream border border-charcoal-light hover:bg-charcoal-mid;
+  }
+  .card {
+    @apply rounded-2xl bg-charcoal-mid/90 border border-charcoal-light shadow-card p-4;
+  }
+  .badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-1 text-xs font-bold uppercase tracking-wide;
+  }
+  .input {
+    @apply w-full rounded-xl bg-charcoal border border-charcoal-light px-4 py-3.5 text-base text-cream
+      placeholder:text-cream-dim focus:outline-none focus:ring-2 focus:ring-gold/50 focus:border-gold
+      min-h-[52px];
+  }
+  .label {
+    @apply block text-sm font-medium text-cream-muted mb-1.5;
+  }
+  .page-title {
+    @apply text-2xl sm:text-3xl font-bold text-cream tracking-tight;
+  }
+  .huge-num {
+    @apply font-display font-black tabular-nums tracking-tight text-gold;
+  }
+}
+
+/* Felt table texture hint */
+.felt-bg {
+  background-color: #0d3b2e;
+  background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(26, 107, 82, 0.45), transparent 55%),
+    radial-gradient(circle at 20% 80%, rgba(8, 40, 32, 0.8), transparent 40%);
+}
