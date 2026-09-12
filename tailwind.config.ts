@@ -10,10 +10,10 @@ const config: Config = {
     extend: {
       colors: {
         felt: {
-          DEFAULT: "#0d3b2e",
-          dark: "#082820",
-          mid: "#145c45",
-          light: "#1a6b52",
+          DEFAULT: "#0c2340",
+          dark: "#061428",
+          mid: "#163a66",
+          light: "#1e4d85",
         },
         charcoal: {
           DEFAULT: "#1a1a1a",
@@ -42,7 +42,7 @@ const config: Config = {
       },
       keyframes: {
         flash: {
-          "0%, 100%": { backgroundColor: "rgb(13, 59, 46)" },
+          "0%, 100%": { backgroundColor: "rgb(12, 35, 64)" },
           "50%": { backgroundColor: "rgb(212, 175, 55)" },
         },
         pulseGold: {

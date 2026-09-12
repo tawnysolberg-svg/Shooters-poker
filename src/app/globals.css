@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --background: #0a1f18;
+  --background: #061428;
   --foreground: #f5e6c8;
 }
 
@@ -60,8 +60,8 @@ body {
 
 /* Felt table texture hint */
 .felt-bg {
-  background-color: #0d3b2e;
+  background-color: #0c2340;
   background-image:
-    radial-gradient(ellipse at 50% 0%, rgba(26, 107, 82, 0.45), transparent 55%),
-    radial-gradient(circle at 20% 80%, rgba(8, 40, 32, 0.8), transparent 40%);
+    radial-gradient(ellipse at 50% 0%, rgba(30, 77, 133, 0.45), transparent 55%),
+    radial-gradient(circle at 20% 80%, rgba(6, 20, 40, 0.85), transparent 40%);
 }
